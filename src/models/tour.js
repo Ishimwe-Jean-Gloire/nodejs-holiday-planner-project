@@ -7,7 +7,6 @@ const holidaySchema = mongoose.Schema({
   },
   backDropImage: {
     type: String,
-    required:true,
   },
   Title: {
     type: String,
@@ -19,7 +18,6 @@ const holidaySchema = mongoose.Schema({
   },
   Duration: {
     type: String,
-    required:true,
   },
   GroupSize: {
     type: String,
@@ -31,15 +29,12 @@ const holidaySchema = mongoose.Schema({
   },
   discountPercentage: {
     type: String,
-    required:true,
   },
   tourType: {
     type: String,
-    required:true,
   },
   Departure: {
     type: String,
-    required:true,
   },
   Seats: {
     type: String,
@@ -63,7 +58,6 @@ const holidaySchema = mongoose.Schema({
   },
   gallery: {
     type: String,
-    required:true,
   },
   priceIncluded: {
     type: String,
@@ -71,7 +65,6 @@ const holidaySchema = mongoose.Schema({
   },
   priceNotIncluded: {
     type: String,
-    required:true,
   },
 },
 {timestamps:true}

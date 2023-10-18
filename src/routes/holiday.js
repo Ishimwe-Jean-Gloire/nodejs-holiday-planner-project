@@ -1,7 +1,16 @@
 import express from "express";
-
+import multer from "multer";
 const holidayRouter = express.Router();
 
+const storage =multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,"tour_assets");
+  },
+  filename:function(req,file,cb){
+    cb(null,file.originalname);
+  },
+})
+const upload =multer({dest:"tour_assets",storage:storage })
 import {
   addNewTour,
   deleteTour,
@@ -13,7 +22,7 @@ import {
 } from "../controllers/tourController";
 
 // create new tour
-holidayRouter.post("/", addNewTour);
+holidayRouter.post("/",upload.single("backDropImage"), addNewTour);
 
 // update tour
 holidayRouter.put("/:id", updateTour);

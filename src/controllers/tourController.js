@@ -1,7 +1,22 @@
 import { tourSchema } from "../models/tour";
+import cloudinary from "cloudinary";
+import dotenv from "dotenv";
+dotenv.config();
 
+cloudinary.v2;
+
+cloudinary.config({
+  cloud_name:process.env.CLOUDNAME,
+  api_key:process.env.APIKEY,
+  api_secret:process.env.APISECRET,
+});
 export const addNewTour = async (req, res) => {
-  const newTour = new tourSchema(req.body);
+  const image =await cloudinary.uploader.upload(req.file.path);
+  console.log(image)
+  const newTour = new tourSchema({
+    ...req.body,
+    backDropImage:req.file.path,
+  });
 
   try {
     const savedTour = await newTour.save();
@@ -12,6 +27,7 @@ export const addNewTour = async (req, res) => {
       data: savedTour,
     });
   } catch (error) {
+     console.log(error);
     res.status(500).json({ success: false, message: "Failed to create tour" });
   }
 };
@@ -53,6 +69,7 @@ export const deleteTour = async (req, res) => {
       message: "Tour Successfully deleted",
     });
   } catch (error) {
+   
     res.status(500).json({
       success: false,
       message: "Failed to delete tour",
