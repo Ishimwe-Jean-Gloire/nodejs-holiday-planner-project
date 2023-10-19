@@ -3,6 +3,7 @@ const app = express();
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import cors from "cors";
 import "dotenv/config";
 
 import holidayRouter from "./src/routes/holiday";
@@ -13,15 +14,21 @@ dotenv.config();
 
 app.use(bodyParser.json());
 
-// database connection
+const corsOptions ={
+  origin:true,
+  credentials:true 
+}
 
 const port = 8080;
+
+// database connection
 mongoose.connect(process.env.MONGO_URI).then((res) => {
   console.log("connected to database");
 });
 
 // middleware
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/tours", holidayRouter);
 app.use("/api/v1/users", userRoute);
