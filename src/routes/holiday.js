@@ -21,20 +21,22 @@ import {
   updateTour,
 } from "../controllers/tourController";
 
+import { verifyAdmin } from "../utils/verifyToken";
+
 // create new tour
-holidayRouter.post("/",upload.single("backDropImage"), addNewTour);
+holidayRouter.post("/",upload.single("backDropImage"), verifyAdmin, addNewTour);
 
 // update tour
-holidayRouter.put("/:id", updateTour);
+holidayRouter.put("/:id", verifyAdmin, updateTour);
 
 // update tour
-holidayRouter.delete("/:id", deleteTour);
+holidayRouter.delete("/:id", verifyAdmin, deleteTour);
 
 // getSingleTour
-holidayRouter.get("/:id", getSingleTour);
+holidayRouter.get("/:id",getSingleTour);
 
 // getAllTour
-holidayRouter.get("/", getAllTour);
+holidayRouter.get("/",getAllTour);
 
 
 // getTourBySearch
