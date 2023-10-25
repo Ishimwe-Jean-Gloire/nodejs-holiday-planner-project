@@ -12,7 +12,7 @@ cloudinary.config({
 });
 export const addNewTour = async (req, res) => {
   const image =await cloudinary.uploader.upload(req.file.path);
-  console.log(image)
+  // console.log(image)
   const newTour = new tourSchema({
     ...req.body,
     backDropImage:req.file.path,
@@ -37,7 +37,7 @@ export const addNewTour = async (req, res) => {
 export const updateTour = async (req, res) => {
   const id = req.params.id;
   try {
-    const updateTour = await tourSchema.findByIdAndUpdate(
+    const updatedTour = await tourSchema.findByIdAndUpdate(
       id,
       {
         $set: req.body,
@@ -48,7 +48,7 @@ export const updateTour = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Tour Successfully updated",
-      data: updateTour,
+      data: updatedTour,
     });
   } catch (error) {
     res.status(500).json({
@@ -56,6 +56,7 @@ export const updateTour = async (req, res) => {
       message: "Failed to update tour",
     });
   }
+
 };
 // delete tour
 

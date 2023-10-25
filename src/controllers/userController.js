@@ -1,15 +1,15 @@
-import { User } from "../models/User";
+import { All } from "../models/all";
 
 // create new user
 export const createUser = async (req, res) => {
-  const newUser = new User(req.body);
+  const newUser = new All(req.body);
 
   try {
     const savedUser = await newUser.save();
 
     res.status(200).json({
       success: true,
-      message: " successfully created",
+      message: "successfully created",
       data: savedUser,
     });
   } catch (error) {
@@ -85,7 +85,7 @@ export const getSingleUser = async (req, res) => {
 
 export const getAllUser = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await All.find({});
 
     res.status(200).json({
       success: true,
