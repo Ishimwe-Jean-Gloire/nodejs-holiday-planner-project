@@ -2,7 +2,10 @@ import express from "express";
 
 const contactsRouter = express.Router();
 
-import { createContact, getAllContacts } from "../controllers/contactController";
+import {
+  createContact,
+  getAllContacts,
+} from "../controllers/contactController";
 
 
 /**
@@ -15,15 +18,14 @@ import { createContact, getAllContacts } from "../controllers/contactController"
  *         email:
  *           type: string
  *           description: user email
- *         replying:
+ *         body:
  *           type: string
- *           description: contact replying
+ *           description: message body
  *       required:
  *         - email
- *         - replying          
+ *         - body
  *
  */
-
 
 /**
  * @swagger
@@ -32,9 +34,8 @@ import { createContact, getAllContacts } from "../controllers/contactController"
  *   description: contact us page
  */
 
-
-contactsRouter.post('/', createContact)
-contactsRouter.get('/', getAllContacts)
+contactsRouter.post("/", createContact);
+contactsRouter.get("/", getAllContacts);
 
 /**
  * @swagger
@@ -57,10 +58,7 @@ contactsRouter.get('/', getAllContacts)
  *               $ref: '#/components/schemas/contact'
  *       500:
  *         description: Internal server error
- */      
-
-
-
+ */
 
 /**
  * @swagger
@@ -79,6 +77,6 @@ contactsRouter.get('/', getAllContacts)
  *                 $ref: '#/components/schemas/contact'
  *       500:
  *          description: Internal server error
- */      
+ */
 
 export default contactsRouter;

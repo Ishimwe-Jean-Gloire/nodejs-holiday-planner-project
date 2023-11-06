@@ -14,6 +14,7 @@ import userRoute from "./src/routes/users";
 import authRoute from "./src/routes/auth";
 import contactRoute from "./src/routes/contact";
 import bookingRoute from "./src/routes/bookings";
+import replyRouter from "./src/routes/replyContact";
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ const corsOptions = {
   credentials: true,
 };
 
-const port = 4000;
+const port = 7000;
 
 // database connection
 mongoose.connect(process.env.MONGO_URI).then((res) => {
@@ -41,7 +42,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:4000",
+        url: "http://localhost:7000",
       },
     ],
   },
@@ -58,6 +59,18 @@ app.use("/api/v1/tours", holidayRouter);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/booking", bookingRoute);
+app.use("/api/v1/reply", replyRouter);
+
+app.use((err,req,res,next)=>{
+
+  err.statusCode = err.statusCode ||500;
+  err.statusCode =err.status || 'error'
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message
+  });
+})
 
 app.listen(port, () => {
   console.log(`Server is running on: http://localhost:${port}`);

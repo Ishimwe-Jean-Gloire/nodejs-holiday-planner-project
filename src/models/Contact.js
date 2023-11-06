@@ -5,10 +5,15 @@ const contactSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    replying: {
+    body: {
         type: String,
         required: true
+    },
+    isReplied:{
+        type: Boolean,
+        default: false
     }
+
 });
 
 export const Contact = mongoose.model("Contact", contactSchema);

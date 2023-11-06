@@ -1,6 +1,10 @@
 import express from "express";
 
-import { createBooking,getBooking,getAllBooking } from "../controllers/bookingController";
+import {
+  createBooking,
+  getBooking,
+  getAllBooking,
+} from "../controllers/bookingController";
 import { verifyUser } from "../utils/verifyToken";
 import { verifyToken } from "../utils/verifyToken";
 
@@ -24,10 +28,12 @@ const router = express.Router();
  *           description: if tour is paid
  *         paymentMethod:
  *           type: string
- *           description: payment method used        
+ *           description: payment method used
+ *         numberofTickets:
+ *           type: number
+ *           description: The number of tickets
  *
  */
-
 
 /**
  * @swagger
@@ -46,8 +52,7 @@ const router = express.Router();
  *       bearFormat: JWT
  */
 
-
-router.post("/",verifyUser, createBooking);
+router.post("/", verifyUser, createBooking);
 
 /**
  * @swagger
@@ -60,7 +65,7 @@ router.post("/",verifyUser, createBooking);
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/booking'
  *     responses:
@@ -74,10 +79,7 @@ router.post("/",verifyUser, createBooking);
  *         description: Internal Server Error
  */
 
-router.get("/:id",verifyUser, getBooking);
-
-
-
+router.get("/:id", verifyUser, getBooking);
 
 /**
  * @swagger
@@ -98,9 +100,8 @@ router.get("/:id",verifyUser, getBooking);
  *                 $ref: '#/components/schemas/booking'
  *       500:
  *          description: Internal server error
- */      
+ */
 
-
-router.get("/",verifyUser, getAllBooking);
+router.get("/", verifyUser, getAllBooking);
 
 export default router;

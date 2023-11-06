@@ -12,6 +12,19 @@ const bookingSchema = new mongoose.Schema(
       required: true
 
     },
+    whoBooked:{
+      type: String
+    },
+    tourBooked:{
+      type: String
+    },
+    status:{
+      type: String,
+      default:"pending"
+    },
+    numberofTicket:{
+      type: Number
+    },
     isPaid: {
       type: String,
       default: false,
