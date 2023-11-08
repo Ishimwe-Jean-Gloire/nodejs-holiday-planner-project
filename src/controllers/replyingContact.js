@@ -16,7 +16,7 @@ export const replyContact = async (req, res) => {
       from: process.env.EMAIL,
       to: contact.email,
       subject: body.subject,
-      test: `Hello Again!,\n ${body.message}`,
+      message: `Hello Again!,\n ${body.message}`
     };
     console.log(mailOptions);
 

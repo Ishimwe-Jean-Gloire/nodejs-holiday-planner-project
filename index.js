@@ -15,6 +15,8 @@ import authRoute from "./src/routes/auth";
 import contactRoute from "./src/routes/contact";
 import bookingRoute from "./src/routes/bookings";
 import replyRouter from "./src/routes/replyContact";
+import paymentRoute from "./src/routes/payment";
+import countBookings from "./src/routes/countBookings";
 
 dotenv.config();
 
@@ -60,6 +62,8 @@ app.use("/api/v1/users", userRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/booking", bookingRoute);
 app.use("/api/v1/reply", replyRouter);
+app.use("/api/v1/pay",paymentRoute)
+app.use("/api/v1/countbooking",countBookings)
 
 app.use((err,req,res,next)=>{
 
